@@ -14,7 +14,7 @@ const DEBOUNCE_DELAY = 300;
 refs.searchBox.addEventListener('input', debounce(onSearchCountries, DEBOUNCE_DELAY));
 
 function onSearchCountries(e) {
-  if (refs.searchBox.value) {
+  if (refs.searchBox.value.length > 1) {
     const inputNameCountrie = refs.searchBox.value.trim();
     return fetchCountries(inputNameCountrie).then(showCountries).catch(inputWrongCountry);
   } else {
@@ -30,7 +30,7 @@ function showCountries(countries) {
     return Notify.info('Too many matches found. Please enter a more specific name.');
   }
 
-  if (countries.length >= 2) {
+  if (countries.length >= 2 && countries.length <= 10) {
     makeMarkupList(countries);
   }
 
